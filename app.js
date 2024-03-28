@@ -1,7 +1,7 @@
-var express = require('express')
-var app = express()
+const express = require('express')
+const app = express()
 
-var path = require('path')
+const path = require('path')
 
 app.listen(3000, function(){
     console.log("start express server on port 3000")
@@ -23,9 +23,9 @@ app.get('/ajax', function(req,res){
     res.sendFile(__dirname + "/public/ajax.html")
 })
 
-//post방식으로 데이터를 받을 때 필요한 모듈입니다.
+//post방식으로 데이터를 받을 때 필요한 모듈
 //req에 데이터를 담아줍니다.
-var bodyParser = require('body-parser')
+const bodyParser = require('body-parser')
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:true}))
 
@@ -33,7 +33,7 @@ app.use(bodyParser.urlencoded({extended:true}))
 const cors = require('cors')
 app.use(cors());
 
-//받은 데이터를 다음과 같이 가공해 json을 통해 클라이언트로 보내줍니다.
+//받은 데이터를 가공해서 json을 통해 클라이언트로 보냄
 app.post('/ajax', function(req,res){
   var responseData = `hi ${req.body.name} i'm balmostory`
   res.json(responseData);
