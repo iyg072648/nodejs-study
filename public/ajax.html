@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script> -->
+    <!-- <script src="ajax.js"></script> -->
+    <script type="text/javascript" src="node_modules/jquery/dist/jquery.js"></script>
+    <script>
+        $(document).ready(function(){
+            $(".ajaxSend").on("click", function(){
+                var email = $('input[name-email]').val();
+                $.ajax({
+                    url: "/ajax",
+                    type: "POST",
+                    dataType: "JSON",
+                    data: {"email" : email}
+                })
+                .done(function (json){
+                    $(".result").text(json.email)
+                })
+                .fail(function (xhr, status, errorThrown){
+                    alert("fail")
+                })
+            })
+        })
+    </script>
+</head>
+<body>
+    <h1>ajax</h1>
+    <form action="/ajax" method="post">
+        이메일 : <input type="text" name="email"><br>
+    </form>
+    <button class="ajaxSend">전송</button>
+    <div class="result"></div>
+</body>
+</html>
