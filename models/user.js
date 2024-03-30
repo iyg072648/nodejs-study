@@ -13,6 +13,16 @@ const user = [
     }
 ]
 
+function findUser(id, pw){
+    for (let i = 0; i < user.length; i++) {
+        if(user[i].userid == id && user[i].userpw === pw){
+            return true;
+        }
+        
+    }
+}
+
 module.exports = {
-    user
+    user,
+    findUser
 }
