@@ -15,11 +15,12 @@ const user = [
 
 function findUser(id, pw){
     for (let i = 0; i < user.length; i++) {
-        if(user[i].userid == id && user[i].userpw === pw){
+        if(user[i].userid === id && user[i].userpw === pw){
+            //사용자 정보와 관리자 정보가 일치할 경우 코드블록
             return true;
         }
-        
     }
+    return false;
 }
 
 module.exports = {

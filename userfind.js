@@ -1,6 +1,7 @@
 const express = require ('express')
 const nunjucks = require('nunjucks')
-const {user, findUser} = require('./models/user.js')
+const {user, findUser} = require('./models/user.js') //user 데이터
+const app = express();
 
 const session = {}
 
@@ -13,10 +14,10 @@ nunjucks.configure('./views', {
 })
 
 app.get('/', (req, res)=> {
-    if(req.header.cookie){
+    if(req.headers.cookie){
         let data = req.headers.cookie
         let sessionId = data.split('=')[1]
-        res.render('finduser.html' ,{
+        res.render('./index_login.html', {
             sessionId
         })
     }else {
@@ -25,7 +26,6 @@ app.get('/', (req, res)=> {
 })
 
 //user
-
 app.get('/user/login', (req, res)=>{
     let msg = req.query.msg
     res.render('./login.html',{
@@ -46,7 +46,7 @@ app.post('/user/login', (req, res)=> {
         // console.log(session)
         session[privateKey] = item[0]
         // console.log(session)
-        res.setHeader('Set-cookie', 'connect.id=${privateKey}; path/')
+        res.setHeader('Set-cookie', `connect.id=${privateKey}; path=/`)
         res.redirect('/')
     }else
     //실패일때 로그인 페이지로 msg랑 같이 던져주기
@@ -56,7 +56,7 @@ app.post('/user/login', (req, res)=> {
 app.get('/user/profile', (req, res)=>{
     let data = req.headers.cookie;
     let sessionId = data.split('=')[1];
-    let usetData = session[sessionId]
+    let userData = session[sessionId]
     console.log(userData)
     if(sessionId){
         res.render('./profile.html',{
