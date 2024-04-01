@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>메인페이지</h1>
+    {% if user %}
+    <ul>
+        <li>프로필</li>
+        <li><a href="/logout">로그아웃</a></li>
+    </ul>
+    {% else %}
+    <ul>
+        <li><a href="/login">로그인</a></li>
+    </ul>
+    {% endif %}
+</body>
+</html>
